@@ -61,7 +61,8 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchImages();
-  }, [fetchImages, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   useEffect(() => {
     if (!mounted.current) {
@@ -72,7 +73,8 @@ const AppProvider = ({ children }) => {
     if (newImages === true && loading === false) {
       setPage((oldPage) => oldPage + 1);
     }
-  }, [loading, newImages]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newImages]);
 
   useEffect(() => {
     const event = window.addEventListener("scroll", () => {
