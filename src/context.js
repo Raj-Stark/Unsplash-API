@@ -1,4 +1,10 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 
 const mainUrl = "https://api.unsplash.com/photos/";
 
@@ -17,7 +23,8 @@ const AppProvider = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);
   const [modalURL, setModalURL] = useState("");
 
-  const fetchImages = async () => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchImages = useCallback(async () => {
     const urlPage = `&page=${page}`;
     const urlQuery = `&query=${query}`;
 
@@ -44,19 +51,17 @@ const AppProvider = ({ children }) => {
         }
       });
 
-      console.log(data);
-
       setLoading(false);
       setNewImages(false);
     } catch (error) {
       setNewImages(false);
       setLoading(false);
     }
-  };
+  });
 
   useEffect(() => {
     fetchImages();
-  }, [page]);
+  }, [fetchImages, page]);
 
   useEffect(() => {
     if (!mounted.current) {
@@ -67,7 +72,7 @@ const AppProvider = ({ children }) => {
     if (newImages === true && loading === false) {
       setPage((oldPage) => oldPage + 1);
     }
-  }, [newImages]);
+  }, [loading, newImages]);
 
   useEffect(() => {
     const event = window.addEventListener("scroll", () => {

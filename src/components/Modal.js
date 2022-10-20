@@ -7,7 +7,6 @@ const Modal = ({ url }) => {
 
   const handleClick = () => {
     setOpenModal(false);
-    console.log("Open Modal");
   };
 
   return (

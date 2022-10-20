@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Modal from "./components/Modal";
 import Photo from "./components/Photo";
